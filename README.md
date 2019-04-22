@@ -1,4 +1,4 @@
-# SenSaison
+# SenSaison v.0.1.0
 
 SenSaison is a platform on which users record seasonal scientific observations. Users' data is verified, recorded, and stored for use in research projects. We maintain an open database, allowing any user to download and use collected data as they see fit.
 
