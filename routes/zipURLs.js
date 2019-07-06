@@ -1,29 +1,33 @@
-const async = require("async");
-const request = require("request");
-const archiver = require("archiver");
+const async = require("async"),
+	request = require("request"),
+	archiver = require("archiver");
 
-function zipURLs(urls, csv, outStream) {
-    let zip = archiver.create("zip");
+module.exports = async (urls, csv) => {
+	return new Promise(function (resolve, reject) {
+		let zip = archiver.create("zip");
 
-    // this isn't working
-    zip.file(csv, {name: "sensaisondownload_withpics.csv"});
+		zip.on("error", err => {
+			reject(err);
+		});
 
-    async.eachLimit(urls, 5, function(url, done) {
-        let stream = request.get(url);
+		zip.append(csv, { name: "sensaisondownload_withpics.csv" });
 
-        stream.on("zip", function(err) {
-            return done(err);
-        }).on("end", function() {
-            return done();
-        });
+		async.each(urls, (url, done) => {
+			let stream = request.get(url);
+			stream.on("error", err => {
+				done(err);
+			}).on("end", () => {
+				done();
+			});
+			zip.append(stream, { name: url.replace(/^.*[\\\/]/, "") });
 
-        // Use the last part of the URL as a filename within the ZIP archive.
-        zip.append(stream, { name : url.replace(/^.*\//, '') });
-    }, function(err) {
-        if (err) throw err;
-        zip.finalize();
-        zip.pipe(outStream);
-    });
-}
-
-module.exports = zipURLs;
+		}, err => {
+			if (err) {
+				reject(err);
+			} else {
+				zip.finalize();
+				resolve(zip);
+			}
+		});
+	});
+};

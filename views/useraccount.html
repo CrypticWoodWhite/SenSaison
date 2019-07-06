@@ -3,62 +3,50 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
 
-  <title>SenSaison</title>
+    <title>SenSaison</title>
 
-  <!-- CSS  -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" />
-  <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
-  <link rel="stylesheet" type="text/css" href="css/googleMaps.css">
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+    <!-- <link href="css/navbar.css" media="screen" rel="stylesheet" type="text/css" /> -->
+    <link rel="stylesheet" type="text/css" href="css/googleMaps.css">
 
 </head>
 
 <body>
 
     <!-- NAV BAR -->
-    <!-- <nav class="white" role="navigation">
-        <div class="nav-wrapper container">
-            <a id="logo-container" href="#" class="brand-logo">Logo</a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="#">Navbar Link</a></li>
-            </ul>
-
-            <ul id="nav-mobile" class="sidenav">
-                <li><a href="#">About Us</a></li>
-            </ul>
-            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <nav class="grey">
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo white-text"><img src="images/senlogo.png" id="logo"></a>
+            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            <ul id="nav-mobile" class="right hide-on-med-and-down">
+                <li><a href="/" class="white-text"> Home</a></li>
+                <li><a href="/team" class="white-text">About us</a></li>
+                <li><a href="/additionalresources" class="white-text">Additional resources</a></li>
+                <li><a href="/logout" class="" id="logout-account">Log out</a></li>
+            </ul>    
         </div>
     </nav>
--->
-
-<div class="wrap">
-  <nav>
-		<ul class="menu" id="top">
-            <li><img src="images/sensaisonNew.png"></li>
-
-            <li><a href="index.html"><span class=""></span> Home</a></li>
-            <li><a href="team.html"><span class=""></span> About us</a></li>
-            <li><a href="additionalresources.html"><span class=""></span> Additional resources</a></li>
-            <li><a href="index.html"><span class=""></span> Log out</a></li>
-		</ul>
-        <div class="clearfix"></div>
-	</nav>
-</div>
+    <ul id="mobile-demo" class="sidenav">
+        <li><a href="/"> Home</a></li>
+        <li><a href="/team"> About us</a></li>
+        <li><a href="/additionalresources">Additional resources</a></li>
+        <li><a href="/logout" class="" id="logout-account-side">Log out</a></li>
+    </ul>
 
     <!-- MAIN -->
     <div id="index-banner" class="success">
         <div class="section no-pad-bot">
-        <div class="container">
-
-        </div>
+            <div class="container">
+            </div>
         </div>
     </div>
-
 
     <div class="container center-align">
         <div class="section">
@@ -101,13 +89,13 @@
                             <option value="land_water" class="form-option">Land or water</option>
                             <option value="other" class="form-option">Other (please explain in Description fields)</option>
                         </select>
-                        <label for="obs-category">Category of observation*</label>
+                        <label for="obs-category">Category*</label>
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col s12 m6">
-                        <label for="googlemap">Location of observation*</label>
+                        <label for="googlemap">Location*</label>
                         <div id="map-wrapper">
                             <form>
                             <button class="btn waves-effect waves-light g1 disabled" type="button" id="clear-pins" disabled="true">Clear Pin</button>
@@ -128,7 +116,7 @@
                         <div class="row">
                             <div class="input-field col s12">
                                 <textarea id="extended-desc" class="materialize-textarea validate" data-length="500" placeholder="Ex. Cold day, some patches of ice on Mirror Lake. Four Canada geese showed up early this morning."></textarea>
-                                <label for="extended-desc">Extended description of observation</label>
+                                <label for="extended-desc">Extended description</label>
                             </div>
                         </div>
 
@@ -141,7 +129,7 @@
                                 <option value="4" class="form-option">4</option>
                                 <option value="5" class="form-option">5 - high confidence</option>
                                 </select>
-                                <label for="first-confidence">Confidence that your observation is the first of its type in your area*</label>
+                                <label for="first-confidence">Confidence your observation is the first of its type in your area*</label>
                             </div>
                         </div>
 
@@ -166,12 +154,12 @@
                     <p>&dagger;<i>The following section is required if you selected animal, plant, or fungus.</i></p>
                     <br>
                     <div class="input-field col s12 m6 l4">
-                        <label for="species">Species common name&dagger;</label>
+                        <label for="species">Common name&dagger;</label>
                         <input type="text" class="validate" id="species" data-length="50">
                     </div>
 
                     <div class="input-field col s12 m6 l4">
-                        <label for="species-sci-name">Species scientific name (if known)</label>
+                        <label for="species-sci-name">Scientific name (if known)</label>
                         <input type="text" class="validate" id="species-sci-name" data-length="50">
                     </div>
 
@@ -196,42 +184,41 @@
         </div>
 
         <div class="row hidden" id="view-near-obs">
-        <h5>Nearby observations</h5><br>
-        <div class="row">
-          <div class="input-field col s12 m4">
-            <h6>Where?</h6>
-            <form>
-              <label id="near-me">
-                <input class="with-gap" type="radio" name="group-1" id="me" value="near-me" /><span>Near me!</span><br>
-              </label>
-              <label>
-                <input class="with-gap" type="radio" name="group-1" id="city" value="near-city" checked /><span>Near a specified city!</span><br>
-              </label>
-            </form><br>
-            <div id="city-select">
-              <form autocomplete="off">
-                <div class="autoComplete">
-                  <label for="event-location" class="form-label">Location*</label>
-                  <input id="locationInput" type="text" name="location" list="suggestion-list" placeholder="City, State">
-                  <datalist id="suggestion-list">
+            <h5>Nearby observations</h5><br>
+            <div class="row">
+                <div class="input-field col s12 m4">
+                    <h6>Where?</h6>
+                    <form>
+                    <label id="near-me">
+                        <input class="with-gap" type="radio" name="group-1" id="me" value="near-me" /><span>Near me!</span><br>
+                    </label>
+                    <label>
+                        <input class="with-gap" type="radio" name="group-1" id="city" value="near-city" checked /><span>Near a specified city!</span><br>
+                    </label>
+                    </form><br>
+                    <div id="city-select">
+                    <form autocomplete="off">
+                        <div class="autoComplete">
+                        <label for="event-location" class="form-label">Location*</label>
+                        <input id="locationInput" type="text" name="location" list="suggestion-list" placeholder="City, State">
+                        <datalist id="suggestion-list">
 
-                  </datalist>
-                </div><br>
-              </form>
-            </div>
-            <form>
-              <label for="radius" class="form-label">Search Radius</label><br>      
-                  <select id="location-radius" class="form-control">
-                    <option id="1-mi" value="1">1 Kilometer</option>
-                    <option id="10-mi" value="10" selected="selected">10 Kilometers</option>
-                    <option id="50-mi" value="50">50 Kilometers</option>
-                    <option id="100-mi" value="100">100 Kilometers</option>
-                    <option id="5-mi" value="500">500 Kilometers</option>
-                    <option id="20-mi" value="1000">1000 Kilometers</option>
-                  </select><br>
-              <button class="btn waves-effect waves-light g1" type="button" id="get-nearby" disabled>Search</button>
-            </form>
-
+                        </datalist>
+                        </div><br>
+                    </form>
+                </div>
+                <form>
+                <label for="radius" class="form-label">Search Radius</label><br>      
+                    <select id="location-radius" class="form-control">
+                        <option id="1-mi" value="1">1 Kilometer</option>
+                        <option id="10-mi" value="10" selected="selected">10 Kilometers</option>
+                        <option id="50-mi" value="50">50 Kilometers</option>
+                        <option id="100-mi" value="100">100 Kilometers</option>
+                        <option id="5-mi" value="500">500 Kilometers</option>
+                        <option id="20-mi" value="1000">1000 Kilometers</option>
+                    </select><br>
+                <button class="btn waves-effect waves-light g1" type="button" id="get-nearby" disabled>Search</button>
+                </form>
             </div>
             <div class="col s12 m8 l8">
                 <div id="map-wrapper">
@@ -328,7 +315,7 @@
                     <option value="land_water" class="form-option">Land or water</option>
                     <option value="other" class="form-option">Other</option>
                 </select>
-                <label for="category-download">Choose a category of observations*</label>
+                <label for="category-download">Category*</label>
                 </div>
 
                 <div class="input-field col s12 m6 l3">
@@ -361,38 +348,37 @@
         </div>  
 
 
-  <footer class="page-footer teal">
-    <div class="container">
-        <div class="row">
-            <div class="col s2">
-                <h5 class="white-text">Team</h5>
-                <ul>
-                <li class="grey-text text-lighten-4">Stefan</li>
-                <li class="grey-text text-lighten-4">Auri</li>
-                <li class="grey-text text-lighten-4">Catherine</li>
-                <li class="grey-text text-lighten-4">Julie</li>
-                </ul>
-            </div>
-
-            <div class="col s10">
-                <h5 class="white-text">Contact</h5>
-                <ul>
-                    <li><a class="white-text" href="https://github.com/stefan-apr">Github</a> | <a class="white-text" href="https://stefan-apr.github.io/Responsive-Portfolio/portfolio.html">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/stefan-apreutesei-592514171/">LinkedIn</a></li>
-                    <li><a class="white-text" href="#!">Github | Portfolio | LinkedIn</a></li>
-                    <li><a class="white-text" href="https://github.com/crypticwoodwhite">Github</a> | <a class="white-text" href="https://crypticwoodwhite.github.io/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/catherinepham-cww/">LinkedIn</a></li>
-                    <li><a class="white-text" href="https://github.com/JulieMathews?tab=repositories">Github</a> | <a class="white-text" href="https://juliemathews.github.io/New_Port/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/julie-mathews/">LinkedIn</a></li>
-                </ul>
-            </div>
-
-        </div>
-        
-        <div class="footer-copyright center-align">
+        <footer class="page-footer teal">
             <div class="container">
-                Copyright 2019 The SenSaison Team. All rights reserved.
-                <br>
-                Layout made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+                <div class="row">
+                    <div class="col s4">
+                        <h5 class="white-text">Team</h5>
+                        <ul>
+                        <li class="grey-text text-lighten-4">Stefan</li>
+                        <li class="grey-text text-lighten-4">Catherine</li>
+                        <li class="grey-text text-lighten-4">Julie</li>
+                        </ul>
+                        </div>   
+                
+                        <div class="col s8">
+                        <h5 class="white-text">Contact</h5>
+                            <ul>
+                            <li><a class="white-text" href="https://github.com/stefan-apr">Github</a> | <a class="white-text" href="https://stefan-apr.github.io/Responsive-Portfolio/portfolio.html">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/stefan-apreutesei-592514171/">LinkedIn</a></li>
+                            <li><a class="white-text" href="https://github.com/crypticwoodwhite">Github</a> | <a class="white-text" href="https://crypticwoodwhite.github.io/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/catherinephamcww/">LinkedIn</a></li>
+                            <li><a class="white-text" href="https://github.com/JulieMathews?tab=repositories">Github</a> | <a class="white-text" href="https://juliemathews.github.io/New_Port/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/julie-mathews/">LinkedIn</a></li>
+                            </ul>
+                        </div>
+                </div>
             </div>
-        </div>
+            
+            <div class="footer-copyright center-align">
+                <div class="container">
+                    Copyright 2019 The SenSaison Team. All rights reserved.
+                    <br>
+                    Layout made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+                    <br>
+                    Icons made by <a class="brown-text text-lighten-3" href="https://www.freepik.com/?__hstc=57440181.0eb3d779ec5765d0fe6d5707603795e0.1556587780268.1557020807941.1557370549277.8&__hssc=57440181.8.1557370549277&__hsfp=2810556" title="Freepik">Freepik</a> from <a class="brown-text text-lighten-3" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> and is licensed by <a class="brown-text text-lighten-3" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC BY 3.0</a></div>
+            </div>
         </footer>
 
 
@@ -405,8 +391,8 @@
     <!-- Scripts specific to user account page -->
     <script type="text/javascript" src="js/forminitialization.js"></script>
     <script type="text/javascript" src="js/useraccount.js"></script>
-    <script type="text/javascript" src="js/submit_delete_request_data.js"></script>
     <script type="text/javascript" src="js/googleMaps.js"></script>
+    <script type="text/javascript" src="js/submit_delete_request_data.js"></script>
 
     </body>
 </html>
