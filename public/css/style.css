@@ -6,6 +6,26 @@
 * Made By MaterializeCSS.com
 */
 
+sb-img-date {
+  font-size: 80%;
+}
+
+.btn-large {
+  font-size: 120%;
+}
+
+.card-title {
+  border-bottom: solid 1px #f2f2f2;
+}
+
+#index-icons {
+  display: inline;
+}
+
+.icon-block {
+  display: inline;
+}
+
 nav ul a,
 nav .brand-logo,
 #signin-button-link {
@@ -149,7 +169,7 @@ overflow: hidden;
 .icon-block img {
   width:51px;
   height: 51px;
-  display: block;
+  /* display: block; */
   margin-top: 30px;
   margin-left: auto;
   margin-right: auto;

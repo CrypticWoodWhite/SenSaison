@@ -3,6 +3,16 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143816140-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+
+            gtag("config", "UA-143816140-1");
+        </script>
+
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
 
@@ -14,7 +24,12 @@
         <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
         <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
 
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+
     </head>
+    
     <body>
 
         <nav class="grey">
@@ -22,25 +37,20 @@
                 <a href="/" class="brand-logo white-text"><img src="images/senlogo.png" id="logo"></a>
                 <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a href="/" class="white-text"> Home</a></li>
-                    <li><a href="/team" class="white-text">About us</a></li>
-                    <li><a href="/additionalresources" class="white-text">Additional resources</a></li>
-                    <li class="signin-li">
-                        <form action="/auth/openid-client" method="POST" class="signin-form">
-                            <button type="submit" class="white-text signin-button-link">Sign in</button>
-                        </form>
-                    </li>                    <li><a href="/useraccount" class="white-text hide" id="account-resources">Your account</a></li>
-                    <li><a href="/logout" class="white-text hide" id="logout-resources">Log out</a></li>
+                    <li><a href="/" class="white-text">Home</a></li>
+                    <li><a href="/about" class="white-text">About</a></li>
+                    <li><a href="/auth/google" class="white-text" id="signin">Login</a></li>
+                    <li><a href="/useraccount" class="white-text hide" id="account">Your account</a></li>
+                    <li><a href="/logout" class="white-text hide" id="logout">Log out</a></li>
                 </ul>    
             </div>
         </nav>
         <ul id="mobile-demo" class="sidenav">
-            <li><a href="/"> Home</a></li>
-            <li><a href="/team"> About us</a></li>
-            <li><a href="/additionalresources">Additional resources</a></li>
-            <li><a href="/auth/openid-client/callback" id="signin-resources-side">Sign in</a></li>
-            <li><a href="/useraccount" class="hide" id="account-resources-side">Your account</a></li>
-            <li><a href="/logout" class="hide" id="logout-resources-side">Log out</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a href="/auth/google" class="" id="signin-side">Login</a></li>
+            <li><a href="/useraccount" class="hide" id="account-side">Your account</a></li>
+            <li><a href="/logout" class="hide" id="logout-side">Log out</a></li>
         </ul>
 
         <!-- MAIN -->
@@ -122,7 +132,7 @@
 
                 <br><br>
                 <div class="row center-align">
-                <a class="btn waves-effect waves-teal btn-flat" id="backtotop" href="#top">Back to top</a>
+                    <a class="btn waves-effect waves-teal btn-flat" id="backtotop" href="#top">Back to top</a>
                 </div>
 
             </div>
@@ -133,43 +143,50 @@
         <footer class="page-footer teal">
             <div class="container">
                 <div class="row">
-                    <div class="col s4">
-                        <h5 class="white-text">Team</h5>
+                    <div class="col s3">
                         <ul>
-                        <li class="grey-text text-lighten-4">Stefan</li>
-                        <li class="grey-text text-lighten-4">Catherine</li>
-                        <li class="grey-text text-lighten-4">Julie</li>
+                            <li><a class="white-text" href="/about">About</a></li>
+                            <li><a class="white-text" href="/team">Team SenSaison</a></li>
+                            <li><a class="white-text" href="/help">Help</a></li>
+                            <li><a class="white-text" href="/additionalresources">Additional Resources</a></li>
                         </ul>
-                        </div>   
-                
-                        <div class="col s8">
-                        <h5 class="white-text">Contact</h5>
-                            <ul>
-                            <li><a class="white-text" href="https://github.com/stefan-apr">Github</a> | <a class="white-text" href="https://stefan-apr.github.io/Responsive-Portfolio/portfolio.html">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/stefan-apreutesei-592514171/">LinkedIn</a></li>
-                            <li><a class="white-text" href="https://github.com/crypticwoodwhite">Github</a> | <a class="white-text" href="https://crypticwoodwhite.github.io/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/catherinephamcww/">LinkedIn</a></li>
-                            <li><a class="white-text" href="https://github.com/JulieMathews?tab=repositories">Github</a> | <a class="white-text" href="https://juliemathews.github.io/New_Port/">Portfolio</a> | <a class="white-text" href="https://www.linkedin.com/in/julie-mathews/">LinkedIn</a></li>
-                            </ul>
-                        </div>
+                    </div>
+                    <div class="col s3">
+                        <ul>
+                            <li><a class="white-text" href="/communityguidelines">Community Guidelines</a></li>
+                            <li><a class="white-text" href="/privacypolicy">Privacy Policy</a></li>
+                            <li><a class="white-text" href="/termsofservice">Terms of Service</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col s6 right-align">
+                        <ul>
+                            <h5>Contact Us</h5>
+                            <li><a class="white-text" href="mailto:teamsensaison&#64;gmail.com" title="Email the team">teamsensaison@gmail.com <i class="white-text far fa-envelope fa-1x contact"></i></a></li>
+                            <li>Seattle, WA, USA</li>
+                        </ul>
+                    </div>
+    
                 </div>
             </div>
             
             <div class="footer-copyright center-align">
                 <div class="container">
-                    Copyright 2019 The SenSaison Team. All rights reserved.
+                    Copyright 2019 Team SenSaison. All rights reserved.
                     <br>
                     Layout made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
                     <br>
                     Icons made by <a class="brown-text text-lighten-3" href="https://www.freepik.com/?__hstc=57440181.0eb3d779ec5765d0fe6d5707603795e0.1556587780268.1557020807941.1557370549277.8&__hssc=57440181.8.1557370549277&__hsfp=2810556" title="Freepik">Freepik</a> from <a class="brown-text text-lighten-3" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> and is licensed by <a class="brown-text text-lighten-3" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC BY 3.0</a></div>
             </div>
         </footer>
-
+    
 
 
         <!--  Scripts -->
-        <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
         <script type="text/javascript" src="js/init.js"></script>
-        <script type="text/javascript" src="js/userAuthBtns_resources.js"></script>
+        <script type="text/javascript" src="js/userAuthBtns.js"></script>
 
 
 

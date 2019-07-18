@@ -1,91 +1,110 @@
 require("dotenv").config();
 const Passport = require("passport"),
-	Strategy = require("openid-client").Strategy,
-	Issuer = require("openid-client").Issuer,
-	generators = require("openid-client").generators,
+	GoogleStrategy = require("passport-google-oauth20").Strategy,
+	// FacebookStrategy = require("passport-facebook").Strategy,
+	// TwitterStrategy = require("passport-twitter").Strategy,
 	db = require("../models");
 
-Issuer.discover("https://accounts.google.com/.well-known/openid-configuration")
-	.then(googleIssuer => {
-		const client = new googleIssuer.Client({
-			client_id: process.env.GOOGLE_CLIENTID,
-			client_secret: process.env.GOOGLE_SECRET,
-			redirect_uris: ["https://sensaison.herokuapp.com/useraccount", "http://localhost:3000/useraccount"],
-			response_types: ["code", "token", "id_token"]
-		});
 
-		const params = {
-			client_id: process.env.GOOGLE_CLIENTID, 
-			response_type: "code token id_token",
-			scope: "openid profile email",
-			nonce: generators.nonce(),
-			redirect_uri: "http://localhost:3000/useraccount",  // REMEMBER TO CHANGE THIS BETWEEN PROD AND DEV
-			state: generators.state(),
-			prompt: "select_account",
-			login_hint: "sub",
-		};
+// GOOGLE
+Passport.use(new GoogleStrategy({
+	clientID: process.env.GOOGLE_CLIENTID,
+	clientSecret: process.env.GOOGLE_SECRET,
+	callbackURL: "/auth/google/callback"
+},
+(accessToken, refreshToken, profile, done) => {
 
-		const verify = async ( tokenset, userinfo, done ) => {
-			console.log("tokenset: ", tokenset);
-			console.log("access_token: ", tokenset.access_token);
-			console.log("id_token: ", tokenset.id_token);
-			console.log("user info: ", userinfo);
-			
-			await db.Users.findOrCreate({
-				where: {
-					openId: tokenset.claims.sub,
-					firstName: tokenset.id_token.given_name,
-					lastName: tokenset.id_token.family_name,
-					email: tokenset.id_token.email
-				}
-			}, (err, user) => {
-				if (err) {
-					console.log("ERROR LOGGING IN");
-					return done(err, user);
-				}
-				if (!user) {
-					console.log("NO USER");
-					return done(null, false);
-				}
-				console.log("FIND OR CREATE");
-				return done(null, { user, tokenset });
-			});
-		};
+	// TODO: give Team SenSaison admin account with access to all APIs
 
-		const passReqToCallback = true,
-			sessionKey = generators.random(),
-			usePKCE = false;
-
-		const options = {
-			client,
-			params,
-			passReqToCallback,
-			sessionKey,
-			usePKCE,
-		};
-
-		Passport.use("openid-client", new Strategy( options, verify ));
-
+	db.Users.findOrCreate({
+		where: {
+			openId: profile.id,
+			firstName: profile.name.givenName,
+			lastName: profile.name.familyName,
+			email: profile.emails[0].value,
+			issuer: "google"
+		}
+	}).then((user, created, err) => {
+		// console.log("findOrCreate Google:", user[0].openId);
+		// console.log("user.openId:", user[0].openId);
+		// console.log("created:", created);
+		return user;
 	}).catch(err => {
 		if (err) {
-			console.log(err);
+			console.log("ERROR with findOrCreate GOOGLE:", err);
 		}
 	});
 
-// session stuff
+	return done(null, profile);
+}));
+
+// TODO: facebook and twitter logins
+
+// FACEBOOK
+// Passport.use(new FacebookStrategy({
+// 	clientID: process.env.FACEBOOK_CLIENTID,
+// 	clientSecret: process.env.FACEBOOK_SECRET,
+// 	callbackURL: "/auth/facebook/callback"
+// },
+// (accessToken, refreshToken, profile, done) => {
+// 	console.log("\nFacebook accessToken:", accessToken, "\n");
+// 	console.log("\nFacebook refreshToken:", refreshToken, "\n");
+// 	console.log("\nFacebook profile:", profile, "\n");
+// 	db.Users.findOrCreate({
+// 		where: {
+// 			openId: profile.id,
+// 			firstName: profile.name.givenName,
+// 			lastName: profile.name.familyName,
+// 			email: profile.emails[0].value,
+//			issuer: "facebook"
+// 		}
+// 	}).then((user, created) => {
+// 		console.log("\nfindOrCreate FACEBOOK:", user[0].openId, "\n");
+// 		return user;
+// 	}).catch(err => {
+// 		if (err) {
+// 			console.log("\nERROR with findOrCreate FACEBOOK:", err, "\n");
+// 		}
+// 	});
+// 	return done(null, { accessToken, refreshToken, profile });
+// }));
+
+// TWITTER
+// Passport.use(new TwitterStrategy({
+// 	clientID: process.env.TWITTER_CLIENTID,
+// 	clientSecret: process.env.TWITTER_SECRET,
+// 	callbackURL: "/auth/twitter/callback"
+// },
+// (accessToken, refreshToken, profile, done) => {
+// 	console.log("\nTwitter accessToken:", accessToken, "\n");
+// 	console.log("\nTwitter refreshToken:", refreshToken, "\n");
+// 	console.log("\nTwitter profile:", profile, "\n");
+// 	db.Users.findOrCreate({
+// 		where: {
+// 			openId: profile.id,
+// 			firstName: profile.name.givenName,
+// 			lastName: profile.name.familyName,
+// 			email: profile.emails[0].value
+//			issuer: "twitter"
+// 		}
+// 	}).then((user, created) => {
+// 		console.log("\nfindOrCreate TWITTER:", user[0].openId, "\n");
+// 		return user;
+// 	}).catch(err => {
+// 		if (err) {
+// 			console.log("\nERROR with findOrCreate TWITTER:", err, "\n");
+// 		}
+// 	});
+// 	return done(null, { accessToken, refreshToken, profile });
+// }));
+
+// SESSIONS
 Passport.serializeUser((user, done) => {
-	console.log("SERIALIZED USER: ", user);
 	done(null, user);
 });
 
 Passport.deserializeUser((id, done) => {
-	db.Users.findOne({
-		where: 
-			{ openid: id }
-	}, (err, user) => {
-		console.log("DESERIALIZED USER: ", user);
-		done(err, user);
-	});
+	done(null, id);
 });
 
 module.exports = Passport;

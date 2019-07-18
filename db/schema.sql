@@ -3,10 +3,10 @@ USE SenSaison_db;
 
 CREATE TABLE IF NOT EXISTS Observations (
     id INT NOT NULL AUTO_INCREMENT,
-    openId VARCHAR(30) NOT NULL REFERENCES Users (openId)
+    openId VARCHAR(50) NOT NULL REFERENCES Users (openId)
         ON DELETE NO ACTION
         ON UPDATE CASCADE,
-    pictureId VARCHAR(30) NOT NULL,
+    pictureId VARCHAR(100) NOT NULL,
     dateObs DATE NOT NULL,
     timeObs TIME NOT NULL,
     latitude FLOAT NOT NULL,
@@ -23,20 +23,18 @@ CREATE TABLE IF NOT EXISTS Observations (
     PRIMARY KEY (id)
 );
 
-
 CREATE TABLE IF NOT EXISTS Users (
     id INT NOT NULL AUTO_INCREMENT,
-    openId VARCHAR(30) NOT NULL,
-    firstName VARCHAR(20) NOT NULL,
-    lastName VARCHAR(20) NOT NULL,
+    openId VARCHAR(50) NOT NULL,
+    firstName VARCHAR(20),
+    lastName VARCHAR(20),
+    displayName VARCHAR(50),
     email VARCHAR(50) NOT NULL,
-    username VARCHAR(20) NOT NULL,
+    issuer ENUM("email_pw", "google", "facebook", "twitter") NOT NULL,
+    username VARCHAR(20),
     createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     updatedAt TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     UNIQUE KEY (openId), 
-    UNIQUE KEY (email),
-    UNIQUE KEY (username)
+    UNIQUE KEY (email)
 );
-
-/*  unhex(replace(uuid(),'-','')) */

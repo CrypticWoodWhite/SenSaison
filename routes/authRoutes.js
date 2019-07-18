@@ -1,17 +1,13 @@
 const Passport = require("../config/passportStrategy"),
-	ensureAuthenticated = require("./ensureAuthenticated");
-	// db = require("../models"),
-	// path = require("path");
-
-let person,
-	access_token;
+	ensureAuthenticated = require("../plugins/ensureAuthenticated"),
+	Sqrl = require("squirrelly");
 
 module.exports = app => {
 
 	app.get("/", (req, res) => {
 		res.render("index", (err, html) => {
 			if (err) {
-				console.log(err);
+				console.log("\nerror rendering index:", err, "\n");
 			}
 			res.send(html);
 		});
@@ -20,7 +16,7 @@ module.exports = app => {
 	app.get("/team", (req, res) => {
 		res.render("team", (err, html) => {
 			if (err) {
-				console.log(err);
+				console.log("\nerror rendering team:", err, "\n");
 			}
 			res.send(html);
 		});
@@ -29,54 +25,155 @@ module.exports = app => {
 	app.get("/additionalresources", (req, res) => {
 		res.render("additionalresources", (err, html) => {
 			if (err) {
-				console.log(err);
+				console.log("\nerror rendering additional resources:", err, "\n");
 			}
 			res.send(html);
 		});
 	});
 
-	app.post("/auth/openid-client", Passport.authenticate("openid-client"));
-	// above not working
+	app.get("/about", (req, res) => {
+		res.render("about", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering about:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
 
-	app.get("/auth/openid-client/callback",
-		Passport.authenticate("openid-client", {
+	app.get("/help", (req, res) => {
+		res.render("help", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering about:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/communityguidelines", (req, res) => {
+		res.render("communityguidelines", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering community guidelines:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/login", (req, res) => {
+		res.render("login", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering login:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/privacypolicy", (req, res) => {
+		res.render("privacypolicy", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering privacy policy:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/termsofservice", (req, res) => {
+		res.render("termsofservice", (err, html) => {
+			if (err) {
+				console.log("\nerror rendering terms of service:", err, "\n");
+			}
+			res.send(html);
+		});
+	});
+
+	app.get("/auth/google",
+		Passport.authenticate("google",
+			{ 
+				scope: ["openid", "profile", "email"]
+			}
+		)
+	);
+
+	app.get("/auth/google/callback",
+		Passport.authenticate("google", {
 			session: true,
 			failureRedirect: "/" ,
-			failureFlash: "Problem with authentication, try again",
-		}),	(req, res) => {
-			res.setHeader("Cookie", ["set-cookie"]);
+			failureFlash: "Problem with Google authentication, try again"
+		}),
+		(req, res) => {
+			req.session.save(() => res.redirect("/useraccount"));
+		}
+	);
 
-			console.log("REQ.USER: ", req.user);
+	app.get("/auth/facebook",
+		Passport.authenticate("facebook",
+			{ 
+				scope: ["openid", "profile", "email"]
+			}
+		)
+	);
 
-			window.person = req.user; // app-level variable?????????????????
-			window.access_token = req.access_token;
+	app.get("/auth/facebook/callback",
+		Passport.authenticate("facebook", {
+			session: true,
+			failureRedirect: "/" ,
+			failureFlash: "Problem with Facebook authentication, try again"
+		}),
+		(req, res) => {
+			req.session.save(() => res.redirect("/useraccount"));
+		}
+	);
 
-			req.session.save(() => {
-				res.send({ person, access_token });
-				res.redirect("/useraccount");
-				console.log("SUCCESSFUL AUTHENTICATION");
-			});
+	app.get("/auth/twitter",
+		Passport.authenticate("twitter",
+			{ 
+				scope: ["openid", "profile", "email"]
+			}
+		)
+	);
+
+	app.get("/auth/twitter/callback",
+		Passport.authenticate("twitter", {
+			session: true,
+			failureRedirect: "/" ,
+			failureFlash: "Problem with Twitter authentication, try again"
+		}),
+		(req, res) => {
+			req.session.save(() => res.redirect("/useraccount"));
 		}
 	);
 	
-	// protect user account page
 	app.get("/useraccount", ensureAuthenticated, (req, res) => {
-		console.log("user account page");
-		console.log("req.user: ", req.user);
-		console.log("person: ", person);
-
-		res.render("useraccount", { user: req.user }, (err, html) => {
-			if (err) {
-				console.log(err);
-			}
-			res.send(html);
-		});
+		res.render("useraccount",
+			{
+				firstName: req.user.dataValues.firstName,
+				lastName: req.user.dataValues.lastName,
+				displayName: req.user.dataValues.displayName,
+				userOpenId: req.user.dataValues.openId
+			},
+			(err, html) => {
+				if (err) {
+					console.log("\nerror rendering user account page:", err, "\n");
+				}
+				res.send(html);
+			});
 	});
 
 	app.get("/logout", (req, res) => {
-		console.log("LOGGING OUT");
+		res.clearCookie();
 		req.logout;
 		req.session.destroy(() => res.redirect("/"));
+	});
+
+	// for sending user profile to client
+	app.get("/api/userprofile", (req, res) => {
+		if (req.user === undefined || req.user === null || !req.user) {
+			// The user is not logged in
+			res.json({});
+		} else {
+			res.json({
+				user: req.user
+			});
+		}
 	});
 
 };

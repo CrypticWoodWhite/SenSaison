@@ -1,0 +1,160 @@
+<!-- After signing in -->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-143816140-1"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag("js", new Date());
+
+            gtag("config", "UA-143816140-1");
+        </script>
+
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <meta name="google-signin-client_id" content="708503444271-t6ob4t8bifbfaeo8nsdp6552grbrskht.apps.googleusercontent.com">
+
+        <title>SenSaison</title>
+
+        <!-- CSS  -->
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+        <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection"/>
+
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+    </head>
+    
+    <body>
+        <!-- fb login -->
+        <div id="fb-root"></div>
+        <script async defer crossorigin="anonymous" src="https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.3&appId=2424152161004698&autoLogAppEvents=1"></script>
+        <!-- google login -->
+        <script src="https://apis.google.com/js/platform.js" async defer></script>
+
+        <nav class="grey">
+            <div class="nav-wrapper">
+                <a href="/" class="brand-logo white-text"><img src="images/senlogo.png" id="logo"></a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a href="/" class="white-text"> Home</a></li>
+                    <li><a href="/about" class="white-text">About</a></li>
+                    <li><a href="/auth/google" class="white-text hide" id="signin">Login</a></li>
+                    <li><a href="/useraccount" class="white-text hide" id="account">Your account</a></li>
+                    <li><a href="/logout" class="white-text hide" id="logout">Log out</a></li>
+                </ul>    
+            </div>
+        </nav>
+        <ul id="mobile-demo" class="sidenav">
+            <li><a href="/">Home</a></li>
+            <li><a href="/team">Team</a></li>
+            <li><a href="/additionalresources">Additional resources</a></li>
+            <li><a href="/auth/google" class="" id="signin-side">Login</a></li>
+            <li><a href="/useraccount" class="hide" id="account-side">Your account</a></li>
+            <li><a href="/logout" class="hide" id="logout-side">Log out</a></li>
+        </ul>
+
+        <!-- MAIN -->
+        <div id="index-banner" class="success">
+            <div class="section no-pad-bot">
+                <div class="container">
+                </div>
+            </div>
+        </div>
+
+        <div class="container center-align">
+            <div class="section">
+                <h3 class="center-align">Login options</h3>
+                <br>
+
+                <div class="row center-align">
+                    <div class="col s12 m3 center-align">
+                    </div>
+                    <div class="col s12 m6 center-align">
+                        <div class="card">
+                            <div class="card-content">
+                                <span class="card-title">Social media login</span>
+                                <br>
+                                <p>
+                                    <a class="google-button" href="/auth/google"><img src="/images/btn_google_signin_dark_normal_web@2x.png" style="height: auto; width:240px;"></a>
+                                    <br><br>
+                                    <a class="fb-login-button" data-width="" data-size="large" data-button-type="login_with" data-auto-logout-link="true" data-use-continue-as="false" href="/auth/facebook"></a>
+                                    <br><br>
+                                    <a href="/auth/twitter" class="twitter-button"><img src="/images/sign-in-with-twitter-gray.png" style="height:auto; width:240px;"></a>
+                                </p>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col s12 m3 center-align">
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <p><strong><em>Email and password sign in coming in the future!</em></strong></p>
+                </div>
+
+                <br><br>
+            </div>
+        </div>
+
+
+
+        <footer class="page-footer teal">
+            <div class="container">
+                <div class="row">
+                    <div class="col s3">
+                        <ul>
+                            <li><a class="white-text" href="/about">About</a></li>
+                            <li><a class="white-text" href="/team">Team SenSaison</a></li>
+                            <li><a class="white-text" href="/help">Help</a></li>
+                            <li><a class="white-text" href="/additionalresources">Additional Resources</a></li>
+                        </ul>
+                    </div>
+                    <div class="col s3">
+                        <ul>
+                            <li><a class="white-text" href="/communityguidelines">Community Guidelines</a></li>
+                            <li><a class="white-text" href="/privacypolicy">Privacy Policy</a></li>
+                            <li><a class="white-text" href="/termsofservice">Terms of Service</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col s6 right-align">
+                        <ul>
+                            <h5>Contact Us</h5>
+                            <li><a class="white-text" href="mailto:teamsensaison&#64;gmail.com" title="Email the team">teamsensaison@gmail.com <i class="white-text far fa-envelope fa-1x contact"></i></a></li>
+                            <li>Seattle, WA, USA</li>
+                        </ul>
+                    </div>
+    
+                </div>
+            </div>
+            
+            <div class="footer-copyright center-align">
+                <div class="container">
+                    Copyright 2019 Team SenSaison. All rights reserved.
+                    <br>
+                    Layout made by <a class="brown-text text-lighten-3" href="http://materializecss.com">Materialize</a>
+                    <br>
+                    Icons made by <a class="brown-text text-lighten-3" href="https://www.freepik.com/?__hstc=57440181.0eb3d779ec5765d0fe6d5707603795e0.1556587780268.1557020807941.1557370549277.8&__hssc=57440181.8.1557370549277&__hsfp=2810556" title="Freepik">Freepik</a> from <a class="brown-text text-lighten-3" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> and is licensed by <a class="brown-text text-lighten-3" href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC BY 3.0</a></div>
+            </div>
+        </footer>
+    
+
+
+        <!--  Scripts -->
+        <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+        <script type="text/javascript" src="js/userAuthBtns.js"></script>
+        <script type="text/javascript" src="js/init.js"></script>
+        <script type="text/javascript" src="js/googlelogin.js"></script>
+
+
+
+    </body>
+</html>

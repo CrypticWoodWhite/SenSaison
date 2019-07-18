@@ -4,17 +4,17 @@ module.exports = (sequelize, DataTypes) => {
 		id: {
 			primaryKey: true,
 			type: DataTypes.INTEGER,
-			allowNull: true,
 			unique: {
 				args: true
-			}
+			},
+			autoIncrement: true
 		},
 		openId: {
 			type: DataTypes.STRING,
 			allowNull: false
 		},
 		pictureId: {
-			type: DataTypes.INTEGER,
+			type: DataTypes.STRING,
 			allowNull: false
 		},
 		dateObs: {
